@@ -209,9 +209,17 @@ html {
   width: 130px;
 }
 @media (max-width: 1501px) {
+  .App-main {
+    padding-left: 30px;
+    padding-right: 20px;
+  }
   .edit-side {
     flex-direction: column;
-    width: 30%;
+    width: 25%;
+  }
+
+  .resume-header {
+    width: 106%;
   }
 
   .resume-header > .contacts {
