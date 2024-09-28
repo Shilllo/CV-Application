@@ -16,13 +16,6 @@ html {
   flex-direction: column;
 }
 
-/* .App-header {
-  background-color: #0e374e;
-  width: 100vw;
-  font-size: calc(20px + 2vmin);
-  color: white;
-} */
-
 .App-main {
   display: flex;
   flex-direction: row;
@@ -207,10 +200,14 @@ html {
 }
 
 .experience-description {
-  height: fit-content;
+  /* height: fit-content; */
   width: 600px;
 }
 
+.experience-leftSide,
+.education-leftSide {
+  width: 130px;
+}
 @media (max-width: 1501px) {
   .edit-side {
     flex-direction: column;
@@ -230,6 +227,10 @@ html {
 }
 
 @media (max-width: 963px) {
+  /* .App-main {
+    width: 963px;
+  } */
+
   .edit-side {
     flex-direction: column;
     width: 30%;
