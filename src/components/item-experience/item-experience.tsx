@@ -1,20 +1,29 @@
+import exp from "constants";
 import * as React from "react";
-export default function ItemExperience() {
+interface Props {
+  experience: {
+    companyName: string;
+    position: string;
+    startDate: string;
+    endDate: string;
+    location: string;
+    description: string;
+  };
+}
+export default function ItemExperience({ experience }: Props) {
   return (
     <div className="item-experience">
       <div className="experience-leftSide">
-        <p className="experience-date">08/2020 – present</p>
-        <p className="experience-location">New York City, US</p>
+        <p className="experience-date">
+          {experience.startDate} – {experience.endDate}
+        </p>
+        <p className="experience-location">{experience.location}</p>
       </div>
 
       <div className="experience-rightSide">
-        <p className="experience-place">Black Mesa Labs</p>
-        <p className="experience-position">UX Research Assistant</p>
-        <div className="experience-description">
-          Supported senior researchers on accessibility standards for the open
-          web. Created and usability tested wireframes and prototypes. Produced
-          interactive documentation for quick onboarding of new researchers.
-        </div>
+        <p className="experience-place">{experience.companyName}</p>
+        <p className="experience-position">{experience.position}</p>
+        <div className="experience-description">{experience.description}</div>
       </div>
     </div>
   );

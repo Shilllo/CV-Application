@@ -105,6 +105,7 @@ html {
   background-color: rgba(14, 55, 78, 0.07);
   border: 0;
   height: 25px;
+  padding: 5px;
 }
 
 .form > textarea {
@@ -202,11 +203,13 @@ html {
 .experience-description {
   /* height: fit-content; */
   width: 600px;
+  height: fit-content;
+  word-break: break-all;
 }
 
 .experience-leftSide,
 .education-leftSide {
-  width: 130px;
+  width: 200px;
 }
 @media (max-width: 1501px) {
   .App-main {

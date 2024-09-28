@@ -4,24 +4,53 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import ItemEducation from "../item-education/item-education";
 import ItemExperience from "../item-experience/item-experience";
-export default function ResumeContainer() {
+
+interface Props {
+  personalInfo: {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+  };
+  education: {
+    placeOfStudy: string;
+    degree: string;
+    startDate: string;
+    endDate: string;
+    location: string;
+  };
+  experience: {
+    companyName: string;
+    position: string;
+    startDate: string;
+    endDate: string;
+    location: string;
+    description: string;
+  };
+}
+export default function ResumeContainer({
+  personalInfo,
+  education,
+  experience,
+}: Props) {
   return (
     <div className="resume-container">
       <div className="resume">
         <div className="resume-header">
-          <div className="name">Jonh Smith</div>
+          <div className="name">{personalInfo.fullName}</div>
 
           <div className="contacts">
-            <div className="phone">
-              <LocalPhoneIcon />
-              <p>+7 999 999 99 99</p>
-            </div>
             <div className="email">
               <EmailIcon />
-              <p>Jonh.smith@gmail.com</p>
+              <p>{personalInfo.email}</p>
             </div>
+            <div className="phone">
+              <LocalPhoneIcon />
+              <p>{personalInfo.phoneNumber}</p>
+            </div>
+
             <div className="location">
-              <FmdGoodIcon /> <p>Moscow, Russia</p>
+              <FmdGoodIcon /> <p>{personalInfo.address}</p>
             </div>
           </div>
         </div>
@@ -29,12 +58,12 @@ export default function ResumeContainer() {
         <div className="resume-body">
           <div className="education">
             <h3 className="title">Education</h3>
-            <ItemEducation />
+            <ItemEducation education={education} />
           </div>
 
           <div className="experience">
             <h3 className="title">Professional Experience</h3>
-            <ItemExperience />
+            <ItemExperience experience={experience} />
           </div>
         </div>
       </div>
