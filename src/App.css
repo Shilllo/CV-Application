@@ -1,38 +1,254 @@
+html {
+  background-color: rgba(14, 55, 78, 0.07);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* .App-header {
+  background-color: #0e374e;
+  width: 100vw;
+  font-size: calc(20px + 2vmin);
+  color: white;
+} */
+
+.App-main {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: 1500px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.edit-side {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sidebar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 20px;
+  padding: 10px;
+  background-color: white;
+  height: fit-content;
+  border-radius: 10px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 10px;
+  flex: 1;
+}
+.clear-load {
+  display: flex;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  justify-content: space-around;
+  width: auto;
+}
+
+.sidebar > button,
+.clear-load > button {
+  background-color: white;
+  color: #0e374e;
+  border: 0px solid #0e374e;
+  font-size: 10px;
+  gap: 10px;
+}
+
+.sidebar > button {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+}
+
+.sidebar > button:first-child {
+  background-color: rgba(14, 55, 78, 0.07);
+}
+
+.clear-load > button:first-child {
+  color: #bb0000;
+}
+
+.sidebar > button > p,
+.clear-load > button > p {
+  margin: 0px;
+  font-size: 10px;
+}
+
+.education-form,
+.experience-form,
+.personal-info-form {
+  background-color: white;
+  height: fit-content;
+  border-radius: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.form > input {
+  border-radius: 5px;
+  background-color: rgba(14, 55, 78, 0.07);
+  border: 0;
+  height: 25px;
+}
+
+.form > textarea {
+  border-radius: 5px;
+  background-color: rgba(14, 55, 78, 0.07);
+  border: 0;
+}
+
+.form > input:hover {
+  box-shadow: 2px 2px 2px rgba(14, 55, 78, 0.07);
+}
+
+.form > label {
+  align-self: self-start;
+}
+
+.addEducation,
+.addExperience {
+  font-size: 15px;
+  border-radius: 10px;
+  padding: 5px;
+  border: 3px solid rgba(14, 55, 78, 0.07);
+}
+
+/*  RESUME BUILDER */
+.resume-container {
+  background-color: #ffffff;
+  display: flex;
+  flex: 1;
+  height: 1000px;
+}
+
+.resume {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resume-header {
+  background-color: #0e374e;
   color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.resume-header > .name {
+  font-size: 30px;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.resume-header > .contacts {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.contacts > div {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.resume-body {
+  padding: 0px 40px 40px 40px;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 20px;
+  background-color: rgba(14, 55, 78, 0.07);
+  padding: 5px;
+}
+
+.item-education {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  text-align: start;
+}
+
+.item-experience {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  text-align: start;
+}
+
+.education-place,
+.experience-place {
+  font-weight: bold;
+}
+
+.experience-description {
+  height: fit-content;
+  width: 600px;
+}
+
+@media (max-width: 1501px) {
+  .edit-side {
+    flex-direction: column;
+    width: 30%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .resume-header > .contacts {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+
+  .contacts > div {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 963px) {
+  .edit-side {
+    flex-direction: column;
+    width: 30%;
+  }
+
+  .clear-load {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .resume-header > .contacts {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+
+  .contacts > div {
+    display: flex;
+    justify-content: center;
   }
 }
