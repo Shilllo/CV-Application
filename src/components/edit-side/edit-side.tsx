@@ -20,26 +20,28 @@ interface Props {
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 
-  education: {
+  education: Array<{
     placeOfStudy: string;
     degree: string;
     startDate: string;
     endDate: string;
     location: string;
-  };
+  }>;
   handleInputChangeEducation: (
+    index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 
-  experience: {
+  experience: Array<{
     companyName: string;
     position: string;
     startDate: string;
     endDate: string;
     location: string;
     description: string;
-  };
+  }>;
   handleInputChangeExperience: (
+    index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
   setPersonalInfo: (personalInfo: {
@@ -48,21 +50,25 @@ interface Props {
     phoneNumber: string;
     address: string;
   }) => void;
-  setEducation: (education: {
-    placeOfStudy: string;
-    degree: string;
-    startDate: string;
-    endDate: string;
-    location: string;
-  }) => void;
-  setExperience: (experience: {
-    companyName: string;
-    position: string;
-    startDate: string;
-    endDate: string;
-    location: string;
-    description: string;
-  }) => void;
+  setEducation: (
+    education: Array<{
+      placeOfStudy: string;
+      degree: string;
+      startDate: string;
+      endDate: string;
+      location: string;
+    }>
+  ) => void;
+  setExperience: (
+    experience: Array<{
+      companyName: string;
+      position: string;
+      startDate: string;
+      endDate: string;
+      location: string;
+      description: string;
+    }>
+  ) => void;
 }
 export default function EditSide({
   handleInputChangePersonal,
@@ -75,6 +81,8 @@ export default function EditSide({
   setEducation,
   setExperience,
 }: Props) {
+  const [indexEducation, setIndexEducation] = React.useState(0);
+  const [indexExperience, setIndexExperience] = React.useState(0);
   return (
     <div className="edit-side">
       <div className="sidebar">
@@ -91,27 +99,33 @@ export default function EditSide({
         <div className="clear-load">
           <Button
             onClick={() => {
+              setIndexEducation(0);
+              setIndexExperience(0);
               setPersonalInfo({
                 fullName: "",
                 email: "",
                 phoneNumber: "",
                 address: "",
               });
-              setEducation({
-                placeOfStudy: "",
-                degree: "",
-                startDate: "",
-                endDate: "",
-                location: "",
-              });
-              setExperience({
-                companyName: "",
-                position: "",
-                startDate: "",
-                endDate: "",
-                location: "",
-                description: "",
-              });
+              setEducation([
+                {
+                  placeOfStudy: "",
+                  degree: "",
+                  startDate: "",
+                  endDate: "",
+                  location: "",
+                },
+              ]);
+              setExperience([
+                {
+                  companyName: "",
+                  position: "",
+                  startDate: "",
+                  endDate: "",
+                  location: "",
+                  description: "",
+                },
+              ]);
             }}
           >
             <DeleteIcon />
@@ -190,8 +204,10 @@ export default function EditSide({
                   id="place-of-study"
                   name="placeOfStudy"
                   placeholder="Enter place of study"
-                  value={education.placeOfStudy}
-                  onChange={handleInputChangeEducation}
+                  value={education[indexEducation].placeOfStudy}
+                  onChange={(event) => {
+                    handleInputChangeEducation(indexEducation, event);
+                  }}
                 />
                 <label htmlFor="degree">Degree</label>
                 <input
@@ -199,8 +215,10 @@ export default function EditSide({
                   id="degree"
                   name="degree"
                   placeholder="Enter degree"
-                  value={education.degree}
-                  onChange={handleInputChangeEducation}
+                  value={education[indexEducation].degree}
+                  onChange={(event) => {
+                    handleInputChangeEducation(indexEducation, event);
+                  }}
                 />
                 <label htmlFor="start-date">Start Date</label>
                 <input
@@ -208,17 +226,21 @@ export default function EditSide({
                   id="start-date"
                   name="startDate"
                   placeholder="Enter start date"
-                  value={education.startDate}
-                  onChange={handleInputChangeEducation}
+                  value={education[indexEducation].startDate}
+                  onChange={(event) => {
+                    handleInputChangeEducation(indexEducation, event);
+                  }}
                 />
                 <label htmlFor="end-date">End Date</label>
                 <input
                   type="date"
                   id="end-date"
                   name="endDate"
-                  value={education.endDate}
+                  value={education[indexEducation].endDate}
                   placeholder="Enter end date"
-                  onChange={handleInputChangeEducation}
+                  onChange={(event) => {
+                    handleInputChangeEducation(indexEducation, event);
+                  }}
                 />
                 <label htmlFor="Location">Location</label>
                 <input
@@ -226,12 +248,41 @@ export default function EditSide({
                   id="Location"
                   name="location"
                   placeholder="Enter location"
-                  value={education.location}
-                  onChange={handleInputChangeEducation}
+                  value={education[indexEducation].location}
+                  onChange={(event) => {
+                    handleInputChangeEducation(indexEducation, event);
+                  }}
                 />
               </div>
 
-              <button className="addEducation">+ Education</button>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#0e374e" }}
+                className="addEducation"
+                onClick={() => {
+                  if (
+                    education[indexEducation].placeOfStudy !== "" &&
+                    education[indexEducation].degree !== "" &&
+                    education[indexEducation].startDate !== "" &&
+                    education[indexEducation].endDate !== "" &&
+                    education[indexEducation].location !== ""
+                  ) {
+                    setIndexEducation(indexEducation + 1);
+                    setEducation([
+                      ...education,
+                      {
+                        placeOfStudy: "",
+                        degree: "",
+                        startDate: "",
+                        endDate: "",
+                        location: "",
+                      },
+                    ]);
+                  }
+                }}
+              >
+                + Education
+              </Button>
             </AccordionDetails>
           </Accordion>
         </div>
@@ -252,8 +303,10 @@ export default function EditSide({
                   id="company-name"
                   name="companyName"
                   placeholder="Enter company name"
-                  value={experience.companyName}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].companyName}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
                 <label htmlFor="postition-title">Position Title</label>
                 <input
@@ -261,8 +314,10 @@ export default function EditSide({
                   id="postition-title"
                   name="position"
                   placeholder="Enter position title"
-                  value={experience.position}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].position}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
                 <label htmlFor="start-date">Start Date</label>
                 <input
@@ -270,8 +325,10 @@ export default function EditSide({
                   id="start-date"
                   name="startDate"
                   placeholder="Enter start date"
-                  value={experience.startDate}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].startDate}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
                 <label htmlFor="end-date">End Date</label>
                 <input
@@ -279,8 +336,10 @@ export default function EditSide({
                   id="end-date"
                   name="endDate"
                   placeholder="Enter end date"
-                  value={experience.endDate}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].endDate}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
                 <label htmlFor="location">Location</label>
                 <input
@@ -288,24 +347,83 @@ export default function EditSide({
                   id="location"
                   name="location"
                   placeholder="Enter location"
-                  value={experience.location}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].location}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
                 <label htmlFor="description">Description</label>
                 <input
                   id="description"
-                  // rows={4}
-                  // cols={50}
                   name="description"
                   placeholder="Enter description"
-                  value={experience.description}
-                  onChange={handleInputChangeExperience}
+                  value={experience[indexExperience].description}
+                  onChange={(event) => {
+                    handleInputChangeExperience(indexExperience, event);
+                  }}
                 />
               </div>
 
-              <button className="addExperience">+ Experience</button>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#0e374e" }}
+                className="addExperience"
+                onClick={() => {
+                  if (
+                    experience[indexExperience].companyName !== "" &&
+                    experience[indexExperience].position !== "" &&
+                    experience[indexExperience].startDate !== "" &&
+                    experience[indexExperience].endDate !== "" &&
+                    experience[indexExperience].location !== "" &&
+                    experience[indexExperience].description !== ""
+                  ) {
+                    setIndexExperience(indexExperience + 1);
+                    setExperience([
+                      ...experience,
+                      {
+                        companyName: "",
+                        position: "",
+                        startDate: "",
+                        endDate: "",
+                        location: "",
+                        description: "",
+                      },
+                    ]);
+                  }
+                }}
+              >
+                + Experience
+              </Button>
             </AccordionDetails>
           </Accordion>
+        </div>
+      </div>
+
+      <div className="custom-container">
+        <div className="layout">
+          <h1>Layout</h1>
+          <div className="layout-options">
+            <button className="layout-top">
+              <div>
+                <div />
+                <div />
+              </div>
+            </button>
+
+            <button className="layout-left">
+              <div>
+                <div />
+                <div />
+              </div>
+            </button>
+
+            <button className="layout-right">
+              <div>
+                <div />
+                <div />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

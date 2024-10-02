@@ -135,7 +135,8 @@ html {
   background-color: #ffffff;
   display: flex;
   flex: 1;
-  height: 1000px;
+  min-height: 1000px;
+  height: fit-content;
 }
 
 .resume {
@@ -263,4 +264,12 @@ html {
     display: flex;
     justify-content: center;
   }
+}
+
+.form-container {
+  display: flex;
+}
+
+.custom-container {
+  display: none;
 }

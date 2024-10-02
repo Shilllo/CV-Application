@@ -12,21 +12,21 @@ interface Props {
     phoneNumber: string;
     address: string;
   };
-  education: {
+  education: Array<{
     placeOfStudy: string;
     degree: string;
     startDate: string;
     endDate: string;
     location: string;
-  };
-  experience: {
+  }>;
+  experience: Array<{
     companyName: string;
     position: string;
     startDate: string;
     endDate: string;
     location: string;
     description: string;
-  };
+  }>;
 }
 export default function ResumeContainer({
   personalInfo,
@@ -58,12 +58,16 @@ export default function ResumeContainer({
         <div className="resume-body">
           <div className="education">
             <h3 className="title">Education</h3>
-            <ItemEducation education={education} />
+            {education.map((education, index) => (
+              <ItemEducation key={index} education={education} />
+            ))}
           </div>
 
           <div className="experience">
             <h3 className="title">Professional Experience</h3>
-            <ItemExperience experience={experience} />
+            {experience.map((experience, index) => (
+              <ItemExperience key={index} experience={experience} />
+            ))}
           </div>
         </div>
       </div>
