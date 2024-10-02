@@ -3,7 +3,6 @@ import * as React from "react";
 import "./App.css";
 import EditSide from "./components/edit-side/edit-side";
 import ResumeContainer from "./components/resume-container/resume-container";
-import { createTheme } from "@mui/material/styles";
 
 function App() {
   const [personalInfo, setPersonalInfo] = React.useState({
